@@ -2,7 +2,7 @@ import os
 import base64
 
 from flask import Flask, request
-from model import Message 
+from model import Message
 
 app = Flask(__name__)
 
@@ -25,15 +25,15 @@ def home():
 
 <h2>Wisdom From Your Fellow Classmates</h2>
 """
-    
+
     for m in Message.select():
         body += """
 <div class="message">
 {}
 </div>
-""".format(m.content)
+""".format(m.content.replace('<', '&lt;').replace('>', '&gt;'))
 
-    return body 
+    return body
 
 
 if __name__ == "__main__":
